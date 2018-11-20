@@ -25,7 +25,7 @@ SECRET_KEY = 'n#6_9w9wd#knt&rq-(50@l@0hqroc5jszwh)h5ozcbo#u2!gzq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.43.113','10.24.30.13','127.0.0.1']  #add IP of server computer in local network, localhost
+ALLOWED_HOSTS = ['127.0.0.1']  #add IP of server computer in local network, localhost
 
 
 # Application definition
