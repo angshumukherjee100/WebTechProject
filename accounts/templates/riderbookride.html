@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<p>Rider </p>
+
+{% if user.is_authenticated %}
+	
+<div class = "w3-container" align="middle">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">See Fares</button>
+    </form>
+</div>
+
+
+
+
+<a href = "{% url 'logout' %}"> logout </a>
+
+<!--add buttons for booking here-->
+
+
+{% endif %}
+
+{% endblock %}

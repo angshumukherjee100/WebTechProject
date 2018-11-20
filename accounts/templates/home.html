@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<title>CARS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body id="myPage">
+<!-- welcome note -->
+<textarea id="myText" style="display:none">Welcome to Amar Cabs.</textarea>
+<!-- Sidebar on click -->
+<nav class="w3-sidebar w3-bar-block w3-theme-d5 w3-card w3-animate-left w3-xxlarge" style="display:none;z-index:2" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-display-topright w3-text-white">Close
+    <i class="fa fa-remove"></i>
+  </a>
+  <a href="{% url 'driverhome' %}" class="w3-bar-item w3-button w3-hover-orange"><i class="fa fa-car"></i>Driver</a>
+  <a href="{% url 'riderhome' %} " class="w3-bar-item w3-button  w3-hover-orange"><i class="fa fa-users"></i>Rider</a>
+</nav>
+
+<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-brown"><i class="fa fa-home w3-margin-right"></i>Home</a>
+  <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About us</a>
+  <a href="#work" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Offers</a>
+  <a href="#pricing" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Pricing</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+  </div>
+  
+  <a onclick="w3_open()" class="w3-bar-item w3-button w3-xlarge w3-right w3-brown w3-circle w3-hover-grey" title="Search"><i class="fa fa-bars"></i></a>
+ </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
+    <a href="#team" class="w3-bar-item w3-button">Team</a>
+    <a href="#work" class="w3-bar-item w3-button">Work</a>
+    <a href="#pricing" class="w3-bar-item w3-button">Price</a>
+    <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+    <a href="#" class="w3-bar-item w3-button">Search</a>
+  </div>
+</div>
+
+<!-- Image Header -->
+<!--div class="w3-display-container w3-brown w3-animate-opacity"--> 
+  
+
+<div class="w3-display-container">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="{% static "images/img1.jpg" %}" alt="howrah bridge" style="width:100%;min-height:350px;max-height:600px;">
+      </div>
+
+      <div class="item">
+        <img src="{% static "images/img2.jpg" %}"  alt="vidyasagar setu" style="width:100%;min-height:350px;max-height:600px;">
+      </div>
+    
+      <div class="item">
+        <img src="{% static "images/img4.jpg" %}"  alt="Victoria Memorial" style="width:100%;min-height:350px;max-height:600px;">
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <div class="w3-container w3-display-bottomleft w3-margin-bottom">  
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-round-xlarge w3-xlarge w3-theme w3-hover-green" title="Go to login profiles"> Get Started</button>
+  </div>
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top" style="color:white" >নমস্কার KOLKATA</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="id01" class="w3-modal w3-corner-round ">
+  <div class="w3-modal-content w3-card-6 w3-animate-zoom w3-round-xlarge">
+    <header class="w3-container w3-orange w3-display-container w3-round-xlarge"> 
+      <span onclick="document.getElementById('id01').style.display='none'" class="w3-button  w3-round-xlarge w3-orange w3-display-topright w3-hover-grey"><i class="fa fa-remove"></i></span>
+      <h1>আমারCABS</h1>
+      <h5>we drive you to utmost comfort!<i class="fa fa-smile-o"></i></h5>
+    </header>
+    <div class="w3-container">
+	<a type="button "class="w3-button w3-round-xlarge w3-xlarge w3-brown w3-hover-green w3-left" href="{% url 'driverhome' %}">driver</a>
+	<a type="button" class="w3-button w3-round-xlarge w3-xlarge w3-brown w3-hover-green w3-right" href="{% url 'riderhome' %}">rider</a>
+    </div>
+    <footer class="w3-container w3-orange w3-round-xlarge">
+      <p>নমস্কার KOLKATA </p>
+    </footer>
+  </div>
+</div>
+
+<!-- Team Container -->
+<div class="w3-container w3-padding-64 w3-center" id="team">
+<h2 style="color:brown ;display:inline">আমার </h2><h1 style="font-family:segoe print; display:inline">Cabs</h1>
+<p>Reach Your destination at lighting speed with us</p>
+
+<div class="w3-row"><br>
+
+<div class="w3-quarter">
+ <i class="material-icons" style="font-size:48px;color:brown">navigation</i>
+  <h3>Speed</h3>
+  <p>We Tries our best to reach you at your destination in minimum time.Our Team constantly works to show you the shortest and fastest path</p>
+</div>
+
+<div class="w3-quarter">
+  <i class="fa fa-inr" style="font-size:48px;color:brown"></i>
+  <h3>Economic</h3>
+  <p>We ensure the minimum rate for your ride.Our Flexi Fare algorithms allows to control the price from exponential growth even during high demand </p>
+</div>
+
+<div class="w3-quarter">
+  <i class="fa fa-taxi" style="font-size:48px;color:brown"></i>
+  <h3>Comfort</h3>
+  <p>All of our cabs are well equipped with media and fully air conditioned. We will provide you our best trained Chauffer. </p>
+</div>
+
+<div class="w3-quarter">
+ <i class="fa fa-heart" style="font-size:48px;color:brown"></i>
+  <h3>Safety</h3>
+  <p>Your Safety is our utmost concern.All of your ride are well tracked and our 24x7 emergency support is always in your service.</p>
+</div>
+
+</div>
+</div>
+
+<!-- Work Row -->
+<div class="w3-row-padding w3-padding-64 w3-theme-l1" id="work">
+
+<div class="w3-quarter">
+<h2><b>Our Offers*</b></h2>
+<h3><p>আমার CABS is celebrating great Diwali offers</p></h3>
+<br><br><br><h5><p><i>* only one offer is valid at a time. No two offers can be clubbed together</i></p><h5>
+</div>
+
+<div class="w3-quarter w3-center">
+<div class="w3-card w3-theme-l4">
+  <i class="fa fa-share w3-jumbo" style="color:brown"></i>
+  <div class="w3-container">
+  <h3>Offer 1</h3>
+  <h4><b>Share & Earn</b></h4>
+  <p>Invite your friends and earn <i class="fa fa-inr"></i> 100 on their first আমার CABS ride  </p>
+  </div>
+  </div>
+</div>
+
+<div class="w3-quarter w3-center">
+<div class="w3-card w3-theme-l3">
+  <i class="fa fa-amazon w3-jumbo" style="color:brown"></i>
+  <div class="w3-container">
+  <h3>Offer 2</h3>
+  <h4><b>AmazonPay Cashback</b></h4>
+  <p>20% cashback on your first five আমার CABS ride upto a maximum amount of <i class="fa fa-inr"></i> 100 </p>
+  </div>
+  </div>
+</div>
+
+<div class="w3-quarter w3-center">
+<div class="w3-card w3-theme-l2">
+  <i class="fa fa-fire w3-jumbo" style="color:brown"></i>
+  <div class="w3-container">
+  <h3>Offer 3</h3>
+  <h4><b>Diwali Bonaza</b></h4>
+  <p>50% off on your every আমার CABS premium ride upto a maximum amount of <i class="fa fa-inr"></i> 200 . Offer valid from 1st November to 10th November.</p>
+  </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Container -->
+
+
+<!-- Pricing Row -->
+<div class="w3-row-padding w3-center w3-padding-64" id="pricing">
+    <h2 style="color:brown">PRICING</h2>
+    <p style="color:brown">Choose a pricing plan that fits your needs.</p><br>
+    <div class="w3-third w3-margin-bottom">
+      <ul class="w3-ul w3-border w3-hover-shadow">
+        <li class="w3-theme-l3">
+          <p class="w3-xlarge">Economic</p>
+        </li>
+        <li class="w3-padding-16"><b>4</b> Seater</li>
+        <li class="w3-padding-16">Air Conditioned </li>
+        <li class="w3-padding-16">No media</li>
+        <li class="w3-padding-16"><b>2</b> luggage</li>
+        <li class="w3-padding-16">
+          <h2 class="w3-wide"><i class="fa fa-inr"></i> 7</h2>
+          <span class="w3-opacity">per km</span>
+        </li>
+      </ul>
+       <img src="{% static "images/car1.png" %}" alt="My image" class="w3-image w3-greyscale-min" style="width:60%;">
+    </div>
+
+    <div class="w3-third w3-margin-bottom">
+      <ul class="w3-ul w3-border w3-hover-shadow">
+        <li class="w3-theme">
+          <p class="w3-xlarge">Premium</p>
+        </li>
+        <li class="w3-padding-16"><b>4</b> Seater</li>
+        <li class="w3-padding-16">Air Conditioned </li>
+        <li class="w3-padding-16"> Media & Wifi available</li>
+        <li class="w3-padding-16"><b>4</b> luggage</li>
+        <li class="w3-padding-16">
+          <h2 class="w3-wide"><i class="fa fa-inr"></i> 9</h2>
+          <span class="w3-opacity">per km</span>
+        </li>
+      </ul>
+      <br><br><br><br>
+      <img src="{% static "images/car2.png" %}" alt="My image" class="w3-image w3-greyscale-min" style="width:60%;">
+    </div>
+
+
+   <div class="w3-third w3-margin-bottom">
+      <ul class="w3-ul w3-border w3-hover-shadow">
+        <li class="w3-theme-d5">
+          <p class="w3-xlarge">SUV</p>
+        </li>
+        <li class="w3-padding-16"><b>6</b> Seater</li>
+        <li class="w3-padding-16">Air Conditioned </li>
+        <li class="w3-padding-16">Media & Wifi Available and </li>
+        <li class="w3-padding-16"><b>6</b> luggage</li>
+        <li class="w3-padding-16">
+          <h2 class="w3-wide"><i class="fa fa-inr"></i> 10</h2>
+          <span class="w3-opacity">per km</span>
+        </li>
+      </ul>
+      <br><br>
+      <img src="{% static "images/car3.png" %}" alt="My image" class="w3-image w3-greyscale-min" style="width:60%;">
+    </div>
+
+</div>
+
+<!-- Contact Container -->
+<div class="w3-container w3-padding-64 w3-theme-l4" id="contact">
+  <div class="w3-row">
+    <div class="w3-col m5">
+    <div class="w3-padding-16"><span class="w3-xlarge w3-border-brown w3-bottombar">Contact Us</span></div>
+      <p><i class="fa fa-map-marker w3-text-brown w3-xlarge"></i>  Kolkata, India</p>
+      <p><i class="fa fa-phone w3-text-brown w3-xlarge"></i>  +91 8017354644</p>
+      <p><i class="fa fa-envelope-o w3-text-brown w3-xlarge"></i>  help@amarcabs.in</p>
+    </div>
+    <div class="w3-col m7">
+      <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
+      <div class="w3-section">      
+        <label>Name</label>
+        <input class="w3-input" type="text" name="Name" required>
+      </div>
+      <div class="w3-section">      
+        <label>Email</label>
+        <input class="w3-input" type="text" name="Email" required>
+      </div>
+      <div class="w3-section">      
+        <label>Message</label>
+        <input class="w3-input" type="text" name="Message" required>
+      </div>  
+      <input class="w3-check" type="checkbox" checked name="Like">
+      <label>I Like it!</label>
+      <button type="submit" class="w3-button w3-right w3-theme">Send</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Image of Footer -->
+<img src="{% static "images/img3.jpg" %}" alt="My image" class="w3-image w3-greyscale-min" style="width:100%;">
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+  <h4>Follow Us</h4>
+  <a class="w3-button w3-large w3-hover-orange " href="javascript:void(0)" title="Facebook"><i class="fa fa-facebook"></i></a>
+  <a class="w3-button w3-large w3-hover-orange  " href="javascript:void(0)" title="Twitter"><i class="fa fa-twitter"></i></a>
+  <a class="w3-button w3-large w3-hover-orange " href="javascript:void(0)" title="Google +"><i class="fa fa-google-plus"></i></a>
+  <a class="w3-button w3-large w3-hover-orange  " href="javascript:void(0)" title="Google +"><i class="fa fa-instagram"></i></a>
+  <a class="w3-button w3-large w3-hover-orange  w3-hide-small" href="javascript:void(0)" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+  
+
+  <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-padding  w3-hide-small">Go To Top</span>   
+    <a class="w3-button w3-theme-d1" href="#myPage"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+
+<script>
+// Script for side navigation
+window.onload = function() {speak(),startTime()};
+function w3_open() {
+    var x = document.getElementById("mySidebar");
+    x.style.width = "300px";
+    x.style.paddingTop = "10%";
+    x.style.display = "block";
+}
+
+// Close side navigation
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+function checkCompatibilty () {
+				if(!('speechSynthesis' in window)){
+					alert('Your browser is not supported. If google chrome, please upgrade!!');
+				}
+			};
+checkCompatibilty();
+var myText = document.getElementById('myText');
+function speak () {
+				var msg = new SpeechSynthesisUtterance();
+				msg.text = myText.value;
+				window.speechSynthesis.speak(msg);
+			};
+</script>
+
+</body>
+</html>
+

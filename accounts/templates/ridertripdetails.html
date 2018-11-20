@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+{% load humanize %}
+{% block content %}
+<html>
+<title>Rider</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+.checked {
+    color: orange;
+}
+</style>
+</head>
+<body class="w3-content" >
+
+<!-- Driver Home -->
+{% if user.is_authenticated %}
+<nav class="navbar navbar-default w3-brown">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"><h2 style="color:white ;display:inline">আমার </h2><h1 style="color:yellow; font-family:segoe print; display:inline">Cabs</h1></a>
+    </div>
+    <ul class="nav navbar-nav">
+    <li>  <a href="{% url 'riderhome' %}" class="w3-button w3-brown w3-block w3-hover-blue-grey w3-padding-16">Home</a></li>
+     <li><a href="{% url 'tripdetails' %}" class="w3-button w3-brown w3-block w3-hover-blue-grey w3-padding-16">Ride Now</a></li>
+      <li><a href="#" class="w3-button w3-brown w3-block w3-hover-blue-grey w3-padding-16">Your Rides</a></li>
+     <li> <a href="{% url 'logout' %}" class="w3-button w3-brown w3-block w3-hover-blue-grey w3-padding-16">Logout</a></li>
+
+    </ul>
+  </div>
+</nav>
+  <div class=" w3-light-grey w3-container w3-center w3-animate-zoom" >
+    <h3><b>Profile</b></h3>
+    <br><br>
+    <div class=" w3-white w3-opacity-min w3-padding-large w3-round-xlarge  w3-container w3-animate-zoom" >
+    <i class="fa fa-user w3-xlarge w3-display-center"> Welcome {{currRider.name}} </i> <br>
+    <i class="fa fa-phone w3-xlarge w3-display-center"> {{currRider.phone}} </i><br>
+    <span class="glyphicon glyphicon-envelope w3-xlarge"> {{currRider.email}} </span>
+  </div><br><br>
+    <div class="w3-padding-64 w3-center w3-animate-top">
+      <h1 >Your Rides</h1>
+
+      <hr class="w3-border-grey" style="margin:auto;width:60%">
+      <br><br><br>
+      {% for trip in riderTriplist %}
+          {% if trip.state == 0 %}
+         <div class =" w3-half w3-light-grey w3-padding-large w3-display-container " style="display: inline">
+          <div class=" w3-padding-64 w3-center w3-blue w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">
+          <div class="w3-center  w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity w3-xlarge">OTP : {{trip.otp}} </div>
+          <h3> Scheduled Trip </h3> 
+          <hr class="w3-border-grey" style="margin:auto;width:60%">
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Trip Started : {{trip.startTime}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Pickup Location : 
+          {% if trip.fromLocation == 'ap' %}
+              Airport
+          {% elif trip.fromLocation == 'ba' %}
+              Baguiati
+          {% elif trip.fromLocation == 'lt' %}
+              Lake Town
+          {% elif trip.fromLocation == 'bg' %}
+              Beleghata
+          {% elif trip.fromLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}
+            </div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Destination : {% if trip.toLocation == 'ap' %}
+              Airport
+          {% elif trip.toLocation == 'ba' %}
+              Baguiati
+          {% elif trip.toLocation == 'lt' %}
+              Lake Town
+          {% elif trip.toLocation == 'bg' %}
+              Beleghata
+          {% elif trip.toLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver: {{trip.driverID.name}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver Rating: 
+            {% for i in rateList %}
+            {% if i <= trip.driverID.rating %}
+            <span class="fa fa-star checked " style="color:orange"></span>
+            {% else %}
+            <span class="fa fa-star  "></span>
+            {% endif %}
+            {% endfor %}
+          </div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Car Model : {{trip.driverID.vehicleName}}</div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Contact :{{trip.driverID.phone}}</div></p>
+          <p>  <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Vehicle No :{{trip.driverID.vehicleNumber}}</div></p>
+          <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Estimated Fare : {{trip.fare|intcomma}} </div>
+          <hr class="w3-border-grey" style="margin:auto;width:60%">
+          <br><br>
+          <a href = "{% url 'ridercancel'%}" class="w3-button w3-ripple w3-hover-grey w3-red w3-center w3-round-xlarge w3-padding-large">Cancel</a>
+
+        </div>
+        </div>
+        {% elif trip.state == 1 %}
+                 <div class =" w3-half w3-light-grey w3-padding-large w3-display-container " style="display: inline">
+          <div class=" w3-padding-64 w3-center w3-green w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">
+          <h3> Ongoing Trip </h3> 
+          <hr class="w3-border-grey" style="margin:auto;width:60%">
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Trip Started : {{trip.startTime}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Pickup Location : 
+          {% if trip.fromLocation == 'ap' %}
+              Airport
+          {% elif trip.fromLocation == 'ba' %}
+              Baguiati
+          {% elif trip.fromLocation == 'lt' %}
+              Lake Town
+          {% elif trip.fromLocation == 'bg' %}
+              Beleghata
+          {% elif trip.fromLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}
+            </div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Destination : {% if trip.toLocation == 'ap' %}
+              Airport
+          {% elif trip.toLocation == 'ba' %}
+              Baguiati
+          {% elif trip.toLocation == 'lt' %}
+              Lake Town
+          {% elif trip.toLocation == 'bg' %}
+              Beleghata
+          {% elif trip.toLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver: {{trip.driverID.name}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver Rating: 
+            {% for i in rateList %}
+            {% if i <= trip.driverID.rating %}
+            <span class="fa fa-star checked " style="color:orange"></span>
+            {% else %}
+            <span class="fa fa-star "></span>
+            {% endif %}
+            {% endfor %}
+          </div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Car Model : {{trip.driverID.vehicleName}}</div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Contact :{{trip.driverID.phone}}</div></p>
+          <p>  <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Vehicle No :{{trip.driverID.vehicleNumber}}</div></p>
+          <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Estimated Fare : {{trip.fare|intcomma}} </div>
+        </div>
+        </div>
+        {% elif trip.state == 2 %}
+                 <div class =" w3-half w3-light-grey w3-padding-large w3-display-container " style="display: inline">
+          <div class=" w3-padding-64 w3-center w3-yellow w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">
+          <h3> Trip Completed </h3> 
+          <hr class="w3-border-brown" style="margin:auto;width:60%">
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Trip Started : {{trip.startTime}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Trip Ends : {{trip.endTime}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Pickup Location : 
+          {% if trip.fromLocation == 'ap' %}
+              Airport
+          {% elif trip.fromLocation == 'ba' %}
+              Baguiati
+          {% elif trip.fromLocation == 'lt' %}
+              Lake Town
+          {% elif trip.fromLocation == 'bg' %}
+              Beleghata
+          {% elif trip.fromLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}
+            </div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Destination : {% if trip.toLocation == 'ap' %}
+              Airport
+          {% elif trip.toLocation == 'ba' %}
+              Baguiati
+          {% elif trip.toLocation == 'lt' %}
+              Lake Town
+          {% elif trip.toLocation == 'bg' %}
+              Beleghata
+          {% elif trip.toLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver: {{trip.driverID.name}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver Rating:
+            {% for i in rateList %}
+            {% if i <= trip.driverID.rating %}
+            <span class="fa fa-star checked " style="color:orange"></span>
+            {% else %}
+            <span class="fa fa-star "></span>
+            {% endif %}
+            {% endfor %}
+          </div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Car Model : {{trip.driverID.vehicleName}}</div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Contact :{{trip.driverID.phone}}</div></p>
+          <p>  <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Vehicle No :{{trip.driverID.vehicleNumber}}</div></p>
+          <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Fare : {{trip.fare|intcomma}} </div><br><br>
+          <a href = "{% url 'ridertriprate'%}" class="w3-button w3-ripple w3-hover-grey w3-red w3-center w3-round-xlarge w3-padding-large" >Rate ride</a>
+        </div>
+        <br><br>
+          
+        </div>
+        {% elif trip.state == 3 %}
+                 <div class =" w3-half w3-light-grey w3-padding-large w3-display-container " style="display: inline">
+          <div class=" w3-padding-64 w3-center w3-red w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">
+          <h3> Cancelled Trip </h3>
+          <hr class="w3-border-grey" style="margin:auto;width:60%"> 
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Pickup Location : 
+          {% if trip.fromLocation == 'ap' %}
+              Airport
+          {% elif trip.fromLocation == 'ba' %}
+              Baguiati
+          {% elif trip.fromLocation == 'lt' %}
+              Lake Town
+          {% elif trip.fromLocation == 'bg' %}
+              Beleghata
+          {% elif trip.fromLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}
+            </div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Destination : {% if trip.toLocation == 'ap' %}
+              Airport
+          {% elif trip.toLocation == 'ba' %}
+              Baguiati
+          {% elif trip.toLocation == 'lt' %}
+              Lake Town
+          {% elif trip.toLocation == 'bg' %}
+              Beleghata
+          {% elif trip.toLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver: {{trip.driverID.name}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver Rating: 
+            {% for i in rateList %}
+            {% if i <= trip.driverID.rating %}
+            <span class="fa fa-star checked " style="color:orange"></span>
+            {% else %}
+            <span class="fa fa-star "></span>
+            {% endif %}
+            {% endfor %}
+          </div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Car Model : {{trip.driverID.vehicleName}}</div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Contact :{{trip.driverID.phone}}</div></p>
+          <p>  <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Vehicle No :{{trip.driverID.vehicleNumber}}</div></p>
+          <hr class="w3-border-grey" style="margin:auto;width:60%">
+          <h5>Your Trip has been Cancelled<h5>
+        </div>
+        </div>
+        {% elif trip.state == 4 %}
+         <div class =" w3-half w3-light-grey w3-padding-large w3-display-container " style="display: inline">
+          <div class=" w3-padding-64 w3-center w3-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">
+          <h3> Trip Rated </h3> 
+          <hr class="w3-border-brown" style="margin:auto;width:60%">
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Trip Started : {{trip.startTime}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Trip Ends : {{trip.endTime}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Pickup Location : 
+          {% if trip.fromLocation == 'ap' %}
+              Airport
+          {% elif trip.fromLocation == 'ba' %}
+              Baguiati
+          {% elif trip.fromLocation == 'lt' %}
+              Lake Town
+          {% elif trip.fromLocation == 'bg' %}
+              Beleghata
+          {% elif trip.fromLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}
+            </div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Destination : {% if trip.toLocation == 'ap' %}
+              Airport
+          {% elif trip.toLocation == 'ba' %}
+              Baguiati
+          {% elif trip.toLocation == 'lt' %}
+              Lake Town
+          {% elif trip.toLocation == 'bg' %}
+              Beleghata
+          {% elif trip.toLocation == 'rh' %}
+              Ruby Hospital
+          {% endif %}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver: {{trip.driverID.name}}</div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Driver Rating: 
+            {% for i in rateList %}
+            {% if i <= trip.driverID.rating %}
+            <span class="fa fa-star checked " style="color:orange"></span>
+            {% else %}
+            <span class="fa fa-star  " ></span>
+            {% endif %}
+            {% endfor %}
+          </div></p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Car Model : {{trip.driverID.vehicleName}}</div> </p>
+          <p> <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity"> Contact :{{trip.driverID.phone}}</div></p>
+          <p>  <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Vehicle No :{{trip.driverID.vehicleNumber}}</div></p>
+          <div class="w3-center w3-light-grey w3-container w3-animate-zoom w3-round-xlarge w3-animate-opacity">Fare : {{trip.fare|intcomma}} </div>
+        </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+	  <br>
+	  <br><br><br>
+     
+    </div>
+	
+  </div>
+</div>
+{% else %}
+<div class="w3-display-container w3-animate-opacity">
+  <div class="w3-half w3-animate-zoom w3-brown w3-container w3-center " style="height:700px">
+    <div class="w3-padding-64 w3-animate-zoom">
+      <h2 style="color:white ;display:inline">আমার </h2><h1 style="color:yellow; font-family:segoe print; display:inline">Cabs</h1>
+	<div class="w3-padding-64 w3-xlarge">
+      <a href="{% url 'riderhome' %}" class="w3-button w3-brown w3-block w3-hover-blue-grey w3-padding-16">Home</a>
+      <a href="{% url 'login' %}" class="w3-button w3-brown w3-block w3-hover-blue-grey w3-padding-16">Login as Rider</a>
+	  <a href="{% url 'ridersignup' %}" class="w3-button w3-brown w3-block w3-hover-blue-grey w3-padding-16">Sign up as Rider</a>
+    </div>
+	</div>
+  </div>
+  <div class="w3-half w3-light-grey w3-container" style="height:700px">
+    <div class="w3-padding-64 w3-center w3-animate-top">
+      <h1 >Rider</h1>
+	  <br>
+	  <br><br><br>
+      <i class="fa fa-users w3-jumbo" style="font:100px; color=white"></i>
+      <div class="w3-left-align w3-padding-large">
+        <p>Now riding is more Fun! Explore Kolkata with a single click<i class="fa fa-smile-o"></i></p>
+         <p>Enter your trip details to get the fare estimate.</p>
+    </div>
+	<hr class="w3-border-grey" style="margin:auto;width:60%">
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+{% block javascript %}
+{%endblock %}
+</body>
+</html>
